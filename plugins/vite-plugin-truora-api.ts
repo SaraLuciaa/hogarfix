@@ -2,7 +2,7 @@ import type { Connect } from "vite";
 import type { Plugin } from "vite";
 import { loadEnv } from "vite";
 
-import { getTruoraTokenFromServer } from "../server/truora-token";
+import { getTruoraTokenFromServer } from "../server/truora-token.js";
 
 function mergeServerEnv(
   loaded: Record<string, string>,

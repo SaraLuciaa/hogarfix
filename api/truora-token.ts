@@ -1,6 +1,6 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
 
-import { getTruoraTokenFromServer } from "../server/truora-token";
+import { getTruoraTokenFromServer } from "../server/truora-token.js";
 
 function headerString(h: string | string[] | undefined): string | undefined {
   if (typeof h === "string") return h;
