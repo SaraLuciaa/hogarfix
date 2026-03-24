@@ -73,10 +73,10 @@ export async function getTruoraTokenFromServer(
     throw new Error(detail || `Error ${res.status}`);
   }
 
-  const data = (await res.json()) as { code?: string };
-  if (!data.code || typeof data.code !== "string") {
-    throw new Error("La respuesta no incluye un token (code) válido.");
+  const data = (await res.json()) as { api_key?: string };
+  if (!data.api_key || typeof data.api_key !== "string") {
+    throw new Error("La respuesta no incluye un api_key válido.");
   }
 
-  return { code: data.code };
+  return { code: data.api_key };
 }
