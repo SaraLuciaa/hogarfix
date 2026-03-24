@@ -41,6 +41,7 @@ export async function getTruoraTokenFromServer(
     key_type: "web",
     api_key_version: "1",
     grant: "digital-identity",
+    country: "co",
     redirect_url: redirectUrl,
     flow_id: flowId,
   });
