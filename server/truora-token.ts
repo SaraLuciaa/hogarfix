@@ -1,4 +1,12 @@
+import { randomUUID } from "node:crypto";
+
 const TRUORA_API_KEYS_URL = "https://api.account.truora.com/v1/api-keys";
+
+function getAccountId(env: NodeJS.ProcessEnv): string {
+  const fromEnv = env.TRUORA_ACCOUNT_ID?.trim();
+  if (fromEnv) return fromEnv;
+  return randomUUID();
+}
 
 export type TruoraTokenResponse = {
   api_key: string;
@@ -36,14 +44,16 @@ export async function getTruoraTokenFromServer(
   }
 
   const redirectUrl = getRedirectUrl(env, opts.origin);
+  const accountId = getAccountId(env);
 
   const body = new URLSearchParams({
     key_type: "web",
     api_key_version: "1",
     grant: "digital-identity",
-    country: "CO",
+    country: "ALL",
     redirect_url: redirectUrl,
     flow_id: flowId,
+    account_id: accountId,
   });
 
   const res = await fetch(TRUORA_API_KEYS_URL, {
