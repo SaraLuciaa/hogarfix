@@ -4,7 +4,7 @@ export type TruoraTokenResponse = {
   api_key: string;
 };
 
-const DEFAULT_REDIRECT_URL = "https://hogarfix.vercel.app/";
+const DEFAULT_REDIRECT_URL = "https://hogarfix.vercel.app/gracias";
 
 function getRedirectUrl(env: NodeJS.ProcessEnv): string {
   const fromEnv = env.TRUORA_REDIRECT_URL?.trim();
