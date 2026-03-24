@@ -79,11 +79,13 @@ function TruoraIframe({ token }: { token: string }) {
   return (
     <div className="bg-muted/10 p-2 sm:p-4">
       <iframe
-        src={`https://identity.truora.com/?token=${encodeURIComponent(token)}`}
+        src={`https://identity.truora.com/?token=${token}`}
         allow="camera"
         title="Verificación de identidad Truora"
-        className="h-[700px] w-full rounded-xl border-none"
-      />
+        className="rounded-xl border-none"
+        width="450 px"
+        height="700 px"
+      ></iframe>
     </div>
   );
 }
