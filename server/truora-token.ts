@@ -40,7 +40,7 @@ export async function getTruoraTokenFromServer(
   const body = new URLSearchParams({
     key_type: "web",
     api_key_version: "1",
-    grant: "digital_identity",
+    grant: "digital-identity",
     redirect_url: redirectUrl,
     flow_id: flowId,
   });
