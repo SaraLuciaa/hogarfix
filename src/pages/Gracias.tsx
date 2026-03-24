@@ -12,9 +12,6 @@ const Gracias = () => {
       <p className="mx-auto mb-8 max-w-md text-lg text-muted-foreground">
         Nos contactaremos contigo para completar el proceso.
       </p>
-      <Button asChild variant="outline" size="lg" className="rounded-xl">
-        <Link to="/">Volver al inicio</Link>
-      </Button>
     </main>
   );
 };
