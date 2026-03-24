@@ -60,7 +60,7 @@ type BodyProps = {
   isPending: boolean;
   isError: boolean;
   isSuccess: boolean;
-  data: { code: string } | undefined;
+  data: { api_key: string } | undefined;
   error: Error | null;
 };
 
@@ -102,11 +102,11 @@ function TruoraModalBody({
     );
   }
 
-  if (isSuccess && data?.code) {
+  if (isSuccess && data?.api_key) {
     return (
       <div className="bg-muted/10 p-2 sm:p-4">
         <iframe
-          src={`https://identity.truora.com/?token=${encodeURIComponent(data.code)}`}
+          src={`https://identity.truora.com/?token=${encodeURIComponent(data.api_key)}`}
           allow="camera"
           title="Verificación de identidad Truora"
           className="h-[700px] w-full rounded-xl border-none"

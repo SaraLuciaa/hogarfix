@@ -23,11 +23,11 @@ function truoraApiMiddleware(
     const origin = req.headers.origin;
     try {
       const merged = mergeServerEnv(getEnv());
-      const { code } = await getTruoraTokenFromServer(merged, {
+      const { api_key } = await getTruoraTokenFromServer(merged, {
         origin: origin ?? null,
       });
       res.setHeader("Content-Type", "application/json");
-      res.end(JSON.stringify({ code }));
+      res.end(JSON.stringify({ api_key }));
     } catch (e) {
       const msg = e instanceof Error ? e.message : "Error";
       res.statusCode = 500;

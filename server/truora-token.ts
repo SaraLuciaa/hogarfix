@@ -1,7 +1,7 @@
 const TRUORA_API_KEYS_URL = "https://api.account.truora.com/v1/api-keys";
 
 export type TruoraTokenResponse = {
-  code: string;
+  api_key: string;
 };
 
 function getRedirectUrl(
@@ -78,5 +78,5 @@ export async function getTruoraTokenFromServer(
     throw new Error("La respuesta no incluye un api_key válido.");
   }
 
-  return { code: data.api_key };
+  return { api_key: data.api_key };
 }

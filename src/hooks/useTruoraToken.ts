@@ -1,7 +1,7 @@
 import { useMutation } from "@tanstack/react-query";
 
 export type TruoraTokenResponse = {
-  code: string;
+  api_key: string;
 };
 
 async function fetchTruoraToken(): Promise<TruoraTokenResponse> {
@@ -12,17 +12,17 @@ async function fetchTruoraToken(): Promise<TruoraTokenResponse> {
     },
   });
 
-  const data = (await res.json()) as { code?: string; error?: string };
+  const data = (await res.json()) as { api_key?: string; error?: string };
 
   if (!res.ok) {
     throw new Error(data.error || `Error ${res.status}`);
   }
 
-  if (!data.code || typeof data.code !== "string") {
-    throw new Error("La respuesta no incluye un token (code) válido.");
+  if (!data.api_key || typeof data.api_key !== "string") {
+    throw new Error("La respuesta no incluye un api_key válido.");
   }
 
-  return { code: data.code };
+  return { api_key: data.api_key };
 }
 
 export function useTruoraToken() {
