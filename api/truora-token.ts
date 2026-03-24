@@ -16,7 +16,9 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
   try {
     const origin = headerString(req.headers.origin);
-    const { api_key } = await getTruoraTokenFromServer(process.env, { origin });
+    const { api_key } = await getTruoraTokenFromServer(process.env, {
+      origin,
+    });
     res.status(200).json({ api_key });
   } catch (e) {
     const msg = e instanceof Error ? e.message : "Error";

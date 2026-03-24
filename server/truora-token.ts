@@ -28,10 +28,11 @@ export async function getTruoraTokenFromServer(
 ): Promise<TruoraTokenResponse> {
   const rootKey = env.TRUORA_ROOT_API_KEY;
   const flowId = env.TRUORA_FLOW_ID;
+  const accountId = env.TRUORA_ACCOUNT_ID?.trim();
 
-  if (!rootKey?.trim() || !flowId?.trim()) {
+  if (!rootKey?.trim() || !flowId?.trim() || !accountId) {
     throw new Error(
-      "Faltan variables de entorno del servidor: TRUORA_ROOT_API_KEY o TRUORA_FLOW_ID.",
+      "Faltan variables de entorno del servidor: TRUORA_ROOT_API_KEY, TRUORA_FLOW_ID o TRUORA_ACCOUNT_ID.",
     );
   }
 
@@ -44,6 +45,7 @@ export async function getTruoraTokenFromServer(
     country: "ALL",
     redirect_url: redirectUrl,
     flow_id: flowId,
+    account_id: accountId,
   });
 
   const res = await fetch(TRUORA_API_KEYS_URL, {
