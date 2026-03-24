@@ -1,3 +1,4 @@
+import { TruoraModal } from "@/components/TruoraModal";
 import { Button } from "@/components/ui/button";
 import { Handshake } from "lucide-react";
 
@@ -19,23 +20,23 @@ const PartnerSection = () => {
               <Handshake className="h-5 w-5 text-primary" />
               <span className="font-semibold text-card-foreground">Registro de aliados</span>
             </div>
-            <div className="flex min-h-[400px] items-center justify-center bg-muted/30 p-4">
-              <iframe
-                src="about:blank"
-                title="Formulario de registro de aliados"
-                className="h-[380px] w-full rounded-lg border-0"
-                sandbox="allow-scripts allow-forms allow-same-origin"
-              />
+            <div className="flex min-h-[280px] flex-col items-center justify-center gap-3 bg-muted/30 px-6 py-10 text-center">
+              <Handshake className="h-12 w-12 text-primary/80" aria-hidden />
+              <p className="max-w-md text-sm text-muted-foreground">
+                Pulsa el botón de abajo para abrir el formulario de registro y verificación en una ventana segura.
+              </p>
             </div>
           </div>
           <div className="mt-8 text-center">
-            <Button
-              size="lg"
-              className="gap-2 bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-6 rounded-xl text-base shadow-elevated"
-            >
-              <Handshake className="h-5 w-5" />
-              Quiero ser aliado
-            </Button>
+            <TruoraModal>
+              <Button
+                size="lg"
+                className="gap-2 bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-6 rounded-xl text-base shadow-elevated"
+              >
+                <Handshake className="h-5 w-5" />
+                Quiero ser aliado
+              </Button>
+            </TruoraModal>
           </div>
         </div>
       </div>
