@@ -20,12 +20,9 @@ function truoraApiMiddleware(
       return;
     }
 
-    const origin = req.headers.origin;
     try {
       const merged = mergeServerEnv(getEnv());
-      const { api_key } = await getTruoraTokenFromServer(merged, {
-        origin: origin ?? null,
-      });
+      const { api_key } = await getTruoraTokenFromServer(merged);
       res.setHeader("Content-Type", "application/json");
       res.end(JSON.stringify({ api_key }));
     } catch (e) {

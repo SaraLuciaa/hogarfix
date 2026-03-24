@@ -4,39 +4,28 @@ export type TruoraTokenResponse = {
   api_key: string;
 };
 
-function getRedirectUrl(
-  env: NodeJS.ProcessEnv,
-  origin: string | null | undefined,
-): string {
+const DEFAULT_REDIRECT_URL = "https://hogarfix.vercel.app/";
+
+function getRedirectUrl(env: NodeJS.ProcessEnv): string {
   const fromEnv = env.TRUORA_REDIRECT_URL?.trim();
   if (fromEnv) return fromEnv;
-  if (origin) {
-    try {
-      return new URL("/callback", origin).href;
-    } catch {
-      /* fall through */
-    }
-  }
-  throw new Error(
-    "Define TRUORA_REDIRECT_URL en el servidor o envía la petición con cabecera Origin (p. ej. desde el navegador).",
-  );
+  return DEFAULT_REDIRECT_URL;
 }
 
 export async function getTruoraTokenFromServer(
   env: NodeJS.ProcessEnv,
-  opts: { origin?: string | null },
 ): Promise<TruoraTokenResponse> {
   const rootKey = env.TRUORA_ROOT_API_KEY;
   const flowId = env.TRUORA_FLOW_ID;
   const accountId = env.TRUORA_ACCOUNT_ID?.trim();
 
-  if (!rootKey?.trim() || !flowId?.trim() || !accountId) {
+  if (!rootKey?.trim() || !flowId?.trim()) {
     throw new Error(
-      "Faltan variables de entorno del servidor: TRUORA_ROOT_API_KEY, TRUORA_FLOW_ID o TRUORA_ACCOUNT_ID.",
+      "Faltan variables de entorno del servidor: TRUORA_ROOT_API_KEY o TRUORA_FLOW_ID.",
     );
   }
 
-  const redirectUrl = getRedirectUrl(env, opts.origin);
+  const redirectUrl = getRedirectUrl(env);
 
   const body = new URLSearchParams({
     key_type: "web",
@@ -45,8 +34,11 @@ export async function getTruoraTokenFromServer(
     country: "ALL",
     redirect_url: redirectUrl,
     flow_id: flowId,
-    account_id: accountId,
   });
+
+  if (accountId) {
+    body.set("account_id", accountId);
+  }
 
   const res = await fetch(TRUORA_API_KEYS_URL, {
     method: "POST",

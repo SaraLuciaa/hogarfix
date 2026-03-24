@@ -83,8 +83,8 @@ function TruoraIframe({ token }: { token: string }) {
         allow="camera"
         title="Verificación de identidad Truora"
         className="rounded-xl border-none"
-        width="450 px"
-        height="700 px"
+        width="450"
+        height="700"
       ></iframe>
     </div>
   );
