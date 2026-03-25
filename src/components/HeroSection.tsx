@@ -1,11 +1,11 @@
+import { useState } from "react";
 import { MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import heroImage from "@/assets/hero-technician.png";
+import WhatsAppModal from "@/components/WhatsAppModal";
 
 const HeroSection = () => {
-  const handleWhatsApp = () => {
-    window.open("https://wa.me/1234567890?text=Hola,%20quiero%20solicitar%20un%20servicio", "_blank");
-  };
+  const [modalOpen, setModalOpen] = useState(false);
 
   return (
     <section className="relative overflow-hidden bg-background">
@@ -29,7 +29,7 @@ const HeroSection = () => {
             <div className="flex flex-col items-center gap-4 sm:flex-row lg:items-start">
               <Button
                 size="lg"
-                onClick={handleWhatsApp}
+                onClick={() => setModalOpen(true)}
                 className="gap-2 bg-whatsapp text-whatsapp-foreground hover:bg-whatsapp/90 text-base px-8 py-6 rounded-xl shadow-elevated"
               >
                 <MessageCircle className="h-5 w-5" />
@@ -46,6 +46,8 @@ const HeroSection = () => {
           </div>
         </div>
       </div>
+
+      <WhatsAppModal open={modalOpen} onOpenChange={setModalOpen} />
     </section>
   );
 };

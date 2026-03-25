@@ -1,10 +1,10 @@
+import { useState } from "react";
 import { MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import WhatsAppModal from "@/components/WhatsAppModal";
 
 const FinalCTASection = () => {
-  const handleWhatsApp = () => {
-    window.open("https://wa.me/1234567890?text=Hola,%20quiero%20agendar%20un%20servicio", "_blank");
-  };
+  const [modalOpen, setModalOpen] = useState(false);
 
   return (
     <section className="relative overflow-hidden py-20 md:py-28">
@@ -18,13 +18,15 @@ const FinalCTASection = () => {
         </p>
         <Button
           size="lg"
-          onClick={handleWhatsApp}
+          onClick={() => setModalOpen(true)}
           className="gap-2 bg-card text-foreground hover:bg-card/90 text-base px-8 py-6 rounded-xl shadow-elevated font-bold"
         >
           <MessageCircle className="h-5 w-5" />
           Agendar servicio ahora
         </Button>
       </div>
+
+      <WhatsAppModal open={modalOpen} onOpenChange={setModalOpen} />
     </section>
   );
 };
