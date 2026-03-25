@@ -19,16 +19,16 @@ import {
 import { useTruoraWhatsApp } from "@/hooks/useTruoraWhatsApp";
 
 const COUNTRY_CODES = [
-  { value: "CO", label: "Colombia (+57)", dial: "+57" },
-  { value: "MX", label: "México (+52)", dial: "+52" },
-  { value: "AR", label: "Argentina (+54)", dial: "+54" },
-  { value: "CL", label: "Chile (+56)", dial: "+56" },
-  { value: "PE", label: "Perú (+51)", dial: "+51" },
-  { value: "EC", label: "Ecuador (+593)", dial: "+593" },
-  { value: "VE", label: "Venezuela (+58)", dial: "+58" },
-  { value: "BR", label: "Brasil (+55)", dial: "+55" },
-  { value: "US", label: "Estados Unidos (+1)", dial: "+1" },
-  { value: "ES", label: "España (+34)", dial: "+34" },
+  { value: "57", label: "Colombia (+57)" },
+  { value: "52", label: "México (+52)" },
+  { value: "54", label: "Argentina (+54)" },
+  { value: "56", label: "Chile (+56)" },
+  { value: "51", label: "Perú (+51)" },
+  { value: "593", label: "Ecuador (+593)" },
+  { value: "58", label: "Venezuela (+58)" },
+  { value: "55", label: "Brasil (+55)" },
+  { value: "1", label: "Estados Unidos (+1)" },
+  { value: "34", label: "España (+34)" },
 ];
 
 type WhatsAppModalProps = {
@@ -37,7 +37,7 @@ type WhatsAppModalProps = {
 };
 
 const WhatsAppModal = ({ open, onOpenChange }: WhatsAppModalProps) => {
-  const [countryCode, setCountryCode] = useState("CO");
+  const [countryCode, setCountryCode] = useState("57");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [sent, setSent] = useState(false);
 
@@ -59,15 +59,13 @@ const WhatsAppModal = ({ open, onOpenChange }: WhatsAppModalProps) => {
     if (!value) {
       setTimeout(() => {
         setPhoneNumber("");
-        setCountryCode("CO");
+        setCountryCode("57");
         setSent(false);
         mutation.reset();
       }, 200);
     }
     onOpenChange(value);
   };
-
-  const selectedCountry = COUNTRY_CODES.find((c) => c.value === countryCode);
 
   return (
     <Dialog open={open} onOpenChange={handleClose}>
@@ -118,7 +116,7 @@ const WhatsAppModal = ({ open, onOpenChange }: WhatsAppModalProps) => {
               </label>
               <div className="flex items-center gap-2">
                 <span className="flex h-10 items-center rounded-md border border-input bg-muted px-3 text-sm text-muted-foreground">
-                  {selectedCountry?.dial}
+                  +{countryCode}
                 </span>
                 <Input
                   type="tel"
